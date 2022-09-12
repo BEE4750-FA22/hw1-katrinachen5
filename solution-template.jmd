@@ -47,9 +47,9 @@ We know that the plant producees $100 m^3/day$ of wastewater with $1 kg/m^3$ of 
 ```
 We also know that 
 ```math
-X_1 + X_2 = 100 kg/day
+X_1 + X_2 + X_3 = 100 kg/day
 ```
-Where $X_1$ is the amount of wastewater disposed of on land in $m^3/day$ and $X_2$ is the amount of wastewater treated in $m^3/day$.
+Where $X_1$ is the amount of wastewater disposed of on land in $m^3/day$, $X_2$ is the amount of wastewater treated in $m^3/day$, and X_3 is if the water is directly released into Pristine Brook.
 
 
 The EPA prohibits companies discharging more that 20 kg/day of YUK into Pristine Brook so the plant must treat:
@@ -68,17 +68,18 @@ We are also given that the treatment efficiency ($e_2$) from chemical treatment,
 e_2 = 1 - 0.005 * X_2
 ```
 
-From this, we also know that the total efficiey of the two methods (e_t) is:
+The treatment efficiency for the third method is 0 since it is not being treated.
+
+From this, we also know that the total efficiey of the methods (e_t) is:
 ```math
 e_t = e_1 * (X_1 / 100) + e_2 * (X_2 / 100) \\
 e_t = 0.80 * (X_1 / 100) + (1 - 0.005 * X_2) * (X_2 / 100) \\
 ```
-To remain under EPA's rules, we want $e_t=0.80$.
 
 
 For the remaining concentration of YUK in the wastewater discharged (c_r):
 ```math
-c_r = 100 (1 - e_t)
+c_r = 100 - (e_t * 100)
 ```
 where 100 is the inital 100 kg/day of YUK.
 
@@ -91,6 +92,8 @@ We also know that the cost per day of Method 2 ($c_2$) in dollars is:
 ```math
 c_2 = X_2 * 1.50
 ```
+There is no cost for method 3, disposing directly into Pristine Brook.
+
 Total cost ($cost_t$) in dollars per day is:
 ```math
 cost_t = c_1 + c_2 \\
@@ -101,12 +104,12 @@ cost_t = (X_1)^2 / 20 + X_2 * 1.50 \\
 ```julia
 # The following funciton will calculate the resulting YUK conceentration and the cost of total cost of the treatment
 
-function YUK(X_1, X_2, e_1)
-    # X_1, X_2, and e_1 are all defined in Problem 1.2; All equations and variables below are also defined in Problem 1.2
+function YUK(X_1, X_2)
+    # X_1, X_2, and X_3 are all defined in Problem 1.2; All equations and variables below are also defined in Problem 1.2
     e_2 = 1 - 0.005 * X_2
-    e_t = e_1 * (X_1 / 100) + e_2 * (X_2 / 100)
+    e_t = 0.80 * (X_1 / 100) + e_2 * (X_2 / 100)
 
-    c_r = 100 * 1 * (1 - e_t)
+    c_r = 100 - (e_t * 100)
     
     cost_t = (X_1)^2 / 20 + X_2 * 1.50
     
@@ -116,11 +119,11 @@ end
 
 ## Problem 1.4
 ```julia
-X_1 = 
-X_2 = 
+X_1 = [100, 75, 50, 25, 0, 100, 75, 50, 25, 0, 0, 0, 0, 0, 0]
+X_2 = [0, 25, 50, 75, 100, 0, 0, 0, 0, 0, 100, 75, 50, 25, 0]
 
-for i in 1:length(X_1)
-    YUK(X_1[i], X_2[i], 0.8)
+for i in 1:eachindex(X_1)
+    YUK(X_1[i], X_2[i])
 end
 
 scatter()
