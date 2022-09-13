@@ -38,7 +38,7 @@ ypos = [1, 0, 0, -1]
 
 graphplot(A, names=names, markersize=0.15, markershapes=shapes, markercolor=:white, x=xpos, y=ypos)
 ```
-![YUK Simulation Diagram](YUK.png)
+![YUK Simulation Diagram](YUK.png).
 
 ## Problem 1.2
 We know that the plant producees $100 m^3/day$ of wastewater with $1 kg/m^3$ of YUK and discharges it into Pristine Brook. This means that they produce:
