@@ -25,15 +25,21 @@ Pkg.instantiate()
 ![YUK Simulation Diagram](YUK.png).
 
 Where:
-Q is the flow of wastewater prroduced by Cheap Plastic Products' plant ($m^3/day$)
-$C_0$ is the initial concentration of YUK ($kg/m^3$)
-$c_r$ is the remaining concentration of YUK ($kg/m^3$)
-$X_1$, $X_2$, and $X_3$ are the amounts of wastewater disposed for each of the respective methods indicated by the subscripts ($m^3/day$)
-$e_1$, $e_2$, and $e_3$ are the treatment efficiencies of each of the respective methods indicated by the subscripts
-$e_t$ is the treatment efficincy of all the methods together
-$c_1$, $c_2$, and $c_3$ are the costs of each of the respective methods indicated by the subscripts (dollars)
-$cost_t$ is the final cost of all the treatment methods
+- The Q is the flow of wastewater produced by Cheap Plastic Products' plant ($m^3/day$)
 
+- The $C_0$ is the initial concentration of YUK ($kg/m^3$)
+
+- The $c_r$ is the remaining concentration of YUK ($kg/m^3$) 
+
+- The $X_1$, $X_2$, and $X_3$ are the amounts of wastewater disposed for each of the respective methods indicated by the subscripts ($m^3/day$)
+
+- The $e_1$, $e_2$, and $e_3$ are the treatment efficiencies of each of the respective methods indicated by the subscripts
+
+- The $e_t$ is the treatment efficincy of all the methods together 
+
+- The $c_1$, $c_2$, and $c_3$ are the costs of each of the respective methods indicated by the subscripts (dollars)
+
+- The $cost_t$ is the final cost of all the treatment methods 
 
 All the equations are derived in Problem 1.2.
 
@@ -122,11 +128,21 @@ end
 X_1 = [100, 75, 50, 25, 0, 100, 75, 50, 25, 0, 0, 0, 0, 0, 0]
 X_2 = [0, 25, 50, 75, 100, 0, 0, 0, 0, 0, 100, 75, 50, 25, 0]
 
-for i in 1:eachindex(X_1)
-    YUK(X_1[i], X_2[i])
+points = zeros(length(X_1), 2)
+
+n = length(X_1)
+
+for i in 1:n
+    yuk = YUK(X_1[i], X_2[i])
+
+    points[i,1] = yuk[1] #YUK concentration
+    points[i,2] = yuk[2] #cost
 end
 
-scatter()
+using Plots
+
+scatter(points[:,1], points[:,2], xlabel = "YUK Concentration [kg/day]" , ylabel = "Cost [Dollar]")
+
 
 ```
 
