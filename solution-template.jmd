@@ -38,7 +38,7 @@ ypos = [1, 0, 0, -1]
 
 graphplot(A, names=names, markersize=0.15, markershapes=shapes, markercolor=:white, x=xpos, y=ypos)
 ```
-![YUK Simulation Diagram](figures/TITLE.png)
+![YUK Simulation Diagram](/figures/YUK.png)
 
 ## Problem 1.2
 We know that the plant producees $100 m^3/day$ of wastewater with $1 kg/m^3$ of YUK and discharges it into Pristine Brook. This means that they produce:
@@ -47,9 +47,9 @@ We know that the plant producees $100 m^3/day$ of wastewater with $1 kg/m^3$ of 
 ```
 We also know that 
 ```math
-X_1 + X_2 + X_3 = 100 kg/day
+X_1 + X_2 + X_3 = 100 m^3/day
 ```
-Where $X_1$ is the amount of wastewater disposed of on land in $m^3/day$, $X_2$ is the amount of wastewater treated in $m^3/day$, and X_3 is if the water is directly released into Pristine Brook.
+Where $X_1$ is the amount of wastewater disposed of on land in $m^3/day$, $X_2$ is the amount of wastewater treated in $m^3/day$, and X_3 is if the water is directly released into Pristine Brook in $m^3/day$.
 
 
 The EPA prohibits companies discharging more that 20 kg/day of YUK into Pristine Brook so the plant must treat:
@@ -72,7 +72,7 @@ The treatment efficiency for the third method is 0 since it is not being treated
 
 From this, we also know that the total efficiey of the methods (e_t) is:
 ```math
-e_t = e_1 * (X_1 / 100) + e_2 * (X_2 / 100) \\
+e_t = e_1 * (X_1 / 100) + e_2 * (X_2 / 100) + 0 * (X_3 / 100) \\
 e_t = 0.80 * (X_1 / 100) + (1 - 0.005 * X_2) * (X_2 / 100) \\
 ```
 
@@ -96,7 +96,7 @@ There is no cost for method 3, disposing directly into Pristine Brook.
 
 Total cost ($cost_t$) in dollars per day is:
 ```math
-cost_t = c_1 + c_2 \\
+cost_t = c_1 + c_2 + 0\\
 cost_t = (X_1)^2 / 20 + X_2 * 1.50 \\
 ```
 
