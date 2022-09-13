@@ -141,8 +141,9 @@ end
 
 using Plots
 
-scatter(points[:,1], points[:,2], xlabel = "YUK Concentration [kg/day]" , ylabel = "Cost [Dollar]")
+scatter(points[:,1], points[:,2], xlabel = "YUK Concentration [kg/day]" , ylabel = "Cost [Dollar]" , legend = false)
 
+vline!([20], color=:red) # plot red line to mark EPA regulatory threshold
 
 ```
 
