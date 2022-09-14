@@ -61,12 +61,12 @@ The EPA prohibits companies discharging more that 20 kg/day of YUK into Pristine
 ```
 
 
-We are given that the only $20%$ of YUK will drain from the soil to the stream. This means that the efficiency of method 1 ($e_1$) is:
+We are given that the only $20%$ of YUK will drain from the soil to the stream. This means that the efficiency of Method 1 ($e_1$) is:
 ```math
 e_1 = 0.80
 ```
 
-We are also given that the treatment efficiency ($e_2$) from chemical treatment, or method 2, is:
+We are also given that the treatment efficiency ($e_2$) from chemical treatment, or Method 2, is:
 ```math
 e_2 = 1 - 0.005 * X_2
 ```
@@ -185,7 +185,20 @@ vline!([20], color=:red) # plot red line to mark EPA regulatory threshold
 ## Problem 1.6
 One thing we assumed was that the daily volume of the wastewater does not change. This may not be accurate as it would depend on how many products they produce a certain day.
 Similarly, there could be volume changes due to infiltration and inflow in the sewer system. Storm water could infiltrate and increase the volume, or the wastewater could leave the system due to cracks/fractures in the sewer system. 
-Storm water also poses a problem for method one if the soil is alreeady saturated at the land they want to dispose the wastewater. It could potentially decrease the assumed fixed 80% removal efficiency. 
-We also assumption of a fixed YUK concentration 
+
+
+Storm water also poses a potential problem for Method 1 if the soil is already saturated at the land they want to dispose the wastewater.
+It could potentially decrease the assumed fixed 80% removal efficiency. 
+
+
+We also had an assumption of a fixed YUK concentration. However, we do not know the properties of YUK.
+YUK could decay and we may need to take that into account. Additionally, there could be existing YUK in the environment that gets picked up by the wastewater 
+
+
+To further improve our model we could add a variety of more variables. We could pick some of the factors mentioned above to investigate such as including a decay rate or infiltration.
+
+We can also investigate any health or environmental impacts of YUK and model how YUK is transported after being disposed into Pristtine Brooke. 
 
 # References
+Referenced the solutiton to the class exercise
+Also referenced Stackoverflow
