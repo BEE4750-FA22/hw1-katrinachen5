@@ -124,9 +124,11 @@ end
 ```
 
 ## Problem 1.4
-```julia
-X_1 = [100, 75, 50, 25, 0, 100, 75, 50, 25, 0, 0, 0, 0, 0, 0]
-X_2 = [0, 25, 50, 75, 100, 0, 0, 0, 0, 0, 100, 75, 50, 25, 0]
+```julia 
+
+X_1 = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+X_2 = [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
+
 
 points = zeros(length(X_1), 2)
 
@@ -148,9 +150,42 @@ vline!([20], color=:red) # plot red line to mark EPA regulatory threshold
 ```
 
 ## Problem 1.5
+Based on the plot from Problem 1.4, I would pick the treatment plan that will cost the least amount of money and still stay within EPA's effluent limit for YUK.
+This ends up being releasing $60 m^3/day$ into Method 1 and $40 m^3/day$ into Method 2. This gives a final concentration of 19.99 kg YUK/day and costs 240 dollars.
+This decision is trying to please factory owners by choosing the cheapest option, but also the public and regulatory agencies by remaining under the EPA's limits.
 
+
+If we were only trying to please the factory owners, they would want the cheapest option which would be no treatment at all since it would be free.
+If we were only trying to please the public, we would probably chose the highest amount of treatment, not accounting cost.
+To please regulatory agencies like the EPA, we just need to stay within their limits. They do not care about costs.
+
+
+The numerical experiment in Problem 1.4 was set up to achieve the EPA's effluent standard for YUK. Because of this, I put all the volume of wastewater into either Method 1 or 2 and did not consider Method 3 which included no treatment. 
+If cost was the main thing we were trying to minimize, I would have tried to put some daily volume of wastewater into metthod 3. Below is a plot where I considered putting ($2 m^3/day$) into Method 3.
+However, we see that the lowest cost would still be releasing $60 m^3/day$ into Method 1 and $40 m^3/day$ into Method 2.
+
+The value could change if the experiment was considering a higher YUK concentration limit as the regulation.  
+
+```julia 
+X_1 = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 49, 53, 58, 63, 68, 73, 78, 83, 88, 93, 98]
+X_2 = [98, 93, 88, 83, 78, 73, 68, 63, 58, 53, 49, 45, 40, 35, 30, 25, 20, 15, 10, 5, 0]
+points = zeros(length(X_1), 2)
+n = length(X_1)
+for i in 1:n
+    yuk = YUK(X_1[i], X_2[i])
+
+    points[i,1] = yuk[1] #YUK concentration
+    points[i,2] = yuk[2] #cost
+end
+using Plots
+scatter(points[:,1], points[:,2], xlabel = "YUK Concentration [kg/day]" , ylabel = "Cost [Dollar]" , legend = false)
+vline!([20], color=:red) # plot red line to mark EPA regulatory threshold
+```
 
 ## Problem 1.6
-
+One thing we assumed was that the daily volume of the wastewater does not change. This may not be accurate as it would depend on how many products they produce a certain day.
+Similarly, there could be volume changes due to infiltration and inflow in the sewer system. Storm water could infiltrate and increase the volume, or the wastewater could leave the system due to cracks/fractures in the sewer system. 
+Storm water also poses a problem for method one if the soil is alreeady saturated at the land they want to dispose the wastewater. It could potentially decrease the assumed fixed 80% removal efficiency. 
+We also assumption of a fixed YUK concentration 
 
 # References
